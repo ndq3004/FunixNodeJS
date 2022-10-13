@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .main-header{
+            background-color: aqua;
+            line-height: 30px;
+        }
+        .main-header__box{
+            display: flex;
+            justify-content: space-between;
+            width: 160px;
+            text-decoration: none;
+            list-style-type: none;
+        }
+
+        .main-header__item a{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-header">
+            <ul class="main-header__box">
+                <li class="main-header__item"><a href="/">Shop</a></li>
+                <li class="main-header__item"><a href="/admin/add-product">Add product</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <form action="/product" method="POST">
+            <input type="text" name="title">
+            <button type="submit">AddProduct</button>
+        </form>
+    </div>
+</body>
+</html>
