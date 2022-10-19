@@ -1,21 +1,21 @@
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 let _db;
 
+let dbUri = 'mongodb+srv://nguyenquan3004:30041998@clusterfunix.utiuxfg.mongodb.net/?retryWrites=true&w=majority';
+
 const mongoConnect = callback => {
-  MongoClient.connect(
-    'mongodb+srv://maximilian:9u4biljMQc4jjqbe@cluster0-ntrwp.mongodb.net/shop?retryWrites=true'
-  )
-    .then(client => {
+  const client = new MongoClient(dbUri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+  client.connect(err => {
+    if(!err){
       console.log('Connected!');
-      _db = client.db();
+      _db = client.db('funix');
       callback();
-    })
-    .catch(err => {
+    }else{
       console.log(err);
-      throw err;
-    });
+    }
+    
+  })
 };
 
 const getDb = () => {

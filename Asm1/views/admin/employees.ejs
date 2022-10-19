@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/employees.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.1.0/css/fixedColumns.dataTables.min.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <h1>Employees Management</h1>
+        <main>
+            <div class="search-bar">
+                <div class="search-bar__input">
+                    <input id="input-search-employee">
+                </div>
+            </div>
+            <table id="example" class="stripe row-border order-column" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Salary</th>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(employees && employees.length > 0) { %>
+                        <% let eee = employees.filter(e => e.includes(a)); %>
+                            <% for(let employee of employees) { %>
+                                <tr>
+                                    <td><%= employee.name %></td>
+                                    <td><%= employee.age %></td>
+                                    <td><%= employee.salary %></td>
+                                    <td><%= employee.role.roleName %></td>
+                                    <td><%= employee.email %></td>
+                                    <td><button>View</button> | <button>Edit</button> | <button>CheckIn</button> | <button>CheckOut</button></td>
+                                </tr>
+                            <% } %>
+                        <% %>
+                    <% } %>
+                </tbody>
+            </table>
+            
+        </main>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+        <script src="/js/employee.js"></script>
+        <%- include('../includes/end.ejs') %>
