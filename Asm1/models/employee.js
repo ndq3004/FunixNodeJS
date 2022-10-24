@@ -28,7 +28,6 @@ class Employee {
     }
     return dbOp
       .then(result => {
-        console.log(result);
       })
       .catch(err => {
         console.log(err);
@@ -42,7 +41,7 @@ class Employee {
       .find()
       .toArray()
       .then(employees => {
-        console.log(employees);
+        // console.log(employees);
         return employees;
       })
       .catch(err => {
@@ -50,14 +49,13 @@ class Employee {
       });
   }
 
-  static findById(prodId) {
+  static findById(employeeId) {
     const db = getDb();
     return db
       .collection('employees')
-      .find({ _id: new mongodb.ObjectId(prodId) })
+      .find({ _id: new mongodb.ObjectId(employeeId) })
       .next()
       .then(product => {
-        console.log(product);
         return product;
       })
       .catch(err => {
@@ -65,11 +63,11 @@ class Employee {
       });
   }
 
-  static deleteById(prodId) {
+  static deleteById(employeeId) {
     const db = getDb();
     return db
       .collection('employees')
-      .deleteOne({ _id: new mongodb.ObjectId(prodId) })
+      .deleteOne({ _id: new mongodb.ObjectId(employeeId) })
       .then(result => {
         console.log('Deleted');
       })

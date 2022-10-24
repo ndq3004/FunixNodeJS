@@ -2,13 +2,34 @@ const path = require('path');
 
 const express = require('express');
 
-const adminController = require('../controllers/employees');
+const employeeController = require('../controllers/employees');
+const rollUpController = require('../controllers/rollUp');
 
 const router = express.Router();
 
-// /admin/products => GET
-router.get('/employees', adminController.getEmployees);
+// /admin/employees => GET Employee list
+router.get('/employees', employeeController.getEmployees);
 
-router.get('/employees/generate', adminController.generateSample);
+// /admin/employee/details/:employeeId => GET employee details by employeeId
+router.get('/employee/details/:employeeId', employeeController.getEmployeeDetails);
+
+//Get Employee Detail to edit
+router.get('/employee/edit/:employeeId', employeeController.getEmployeeDetails);
+// Post Employee details
+router.post('/employee/edit/:employeeId', employeeController.addOrUpdateEmployeeDetails);
+
+//GET CheckIn 
+router.get('/employee/checkin/:employeeId', rollUpController.getDetailToCheckIn);
+// POST CheckIn
+router.post('/employee/checkin/:employeeId', rollUpController.postDetailToCheckIn);
+
+//GET CheckIn 
+router.get('/employee/checkout/:employeeId', rollUpController.getDetailToCheckOut);
+// POST CheckIn
+router.post('/employee/checkout/:employeeId', rollUpController.postDetailToCheckOut);
+
+
+//Generate sample data
+router.get('/employees/generate', employeeController.generateSample);
 
 module.exports = router;

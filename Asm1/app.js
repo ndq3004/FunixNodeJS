@@ -15,7 +15,8 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-const adminEmployeeRoutes = require('./routes/employees');
+const employeeRoutes = require('./routes/employees');
+const employeeApis = require('./routes/api/employees');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,10 +31,20 @@ app.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes);
-app.use('/admin', adminEmployeeRoutes);
+app.use('/admin', employeeRoutes);
+app.use('/api/admin', employeeApis);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
+app.use((err, req, res, next) => {
+  console.log('this is error handler')
+  
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(500)
+  res.send(err)
+})
 
 mongoConnect(() => {
   app.listen(3000);

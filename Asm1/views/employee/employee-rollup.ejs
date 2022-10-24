@@ -1,0 +1,68 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/employees.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <main>
+                <h2><%= pageTitle%></h2>
+                <form id="formDetails" action="<%= path %>" method="POST">
+                    <input type="text" hidden id="_id" name="_id" value="<%= employee._id%>">
+                    <input type="text" hidden id="formMode" value="<%= state %>">
+                    <div class="card card-body form-group">
+                        <label for="name">Employee name</label>
+                        <input type="text" class="form-control" id="name"
+                            placeholder="employee name" value="<%= employee.name%>" disabled>
+                    </div>
+
+                    <div class="card card-body form-group">
+                        <label for="workPlace">Working place</label>
+                        <select multiple class="height-60 custom-select form-control" id="workPlace" name="workPlace">
+                            <% for(let place of ['Office', 'Home']) {%>
+                                <% if(rollUpData.workPlace == place || (!rollUpData.workPlace && place == 'Office')){ %>
+                                    <option value="<%= place %>" selected><%= place %></option>        
+                                <% }else{ %>
+                                    <option value="<%= place %>"><%= place %></option>
+                                <% } %>
+                            <% }%>
+                        </select>
+                    </div>
+
+                    <% if(state === 'checkin') { %>
+                        <div class="card card-body form-group"> 
+                            <label for="startTime">Start time (date and time):</label>
+                            <input type="datetime-local" id="startTime" name="startTime" value="<%= rollUpData.startTime %>">
+                        </div>
+                    <% } else { %>
+                        <div class="card card-body form-group"> 
+                            <label for="startTime">Start time (date and time):</label>
+                            <input type="datetime-local" id="startTime" name="startTime" value="<%= rollUpData.startTime %>" disabled>
+                        </div>
+
+                        <div class="card card-body form-group"> 
+                            <label for="startTime">End time (date and time):</label>
+                            <input type="datetime-local" id="endTime" name="endTime" value="<%= rollUpData.endTime %>">
+                        </div>
+                    <% } %>
+
+                    <div class="form-group">
+                        <% if(state === 'checkin') { %>
+                            <button type="submit" class="btn btn-success">Check in</button>
+                            <input type="button" onclick="function back(){location.href='/admin/employees'};back()" value="Back" class="btn btn-outline-dark">
+                        <% } else if(state === 'checkout') { %>
+                            <button type="submit" class="btn btn-success">Check out</button>
+                            <input type="button" onclick="function back(){location.href='/admin/employees'};back()" value="Back" class="btn btn-outline-dark">
+                        <% } %>
+                    </div>
+                </form>
+
+                <!-- Check in history -->
+
+            </main>
+
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+            <%- include('../includes/end.ejs') %>
