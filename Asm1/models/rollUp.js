@@ -16,6 +16,7 @@ class RollUp {
         let dbOp;
         if (this._id) {
             // Update the product
+            console.log(this)
             dbOp = db
                 .collection('rollUp')
                 .updateOne({ _id: this._id }, { $set: this });

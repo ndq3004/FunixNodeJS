@@ -89,9 +89,11 @@ $(document).ready(function () {
                             }, 100)
                         }
                     }
-                } else {
-                    //show message
+                } else if(status == 'nocontent'){
+                    location.href = "/admin/employee/checkin/" + employeeId
                 }
+            }).catch(ex => {
+                debugger
             })
 
         }

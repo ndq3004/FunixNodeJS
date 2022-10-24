@@ -9,7 +9,8 @@
             <main>
                 <h2><%= pageTitle%></h2>
                 <form id="formDetails" action="<%= path %>" method="POST">
-                    <input type="text" hidden id="_id" name="_id" value="<%= employee._id%>">
+                    <input type="text" hidden id="employeeId" name="employeeId" value="<%= employee._id%>">
+                    <input type="text" hidden id="_id" name="_id" value="<%= rollUpData._id%>">
                     <input type="text" hidden id="formMode" value="<%= state %>">
                     <div class="card card-body form-group">
                         <label for="name">Employee name</label>
@@ -42,7 +43,7 @@
                         </div>
 
                         <div class="card card-body form-group"> 
-                            <label for="startTime">End time (date and time):</label>
+                            <label for="endTime">End time (date and time):</label>
                             <input type="datetime-local" id="endTime" name="endTime" value="<%= rollUpData.endTime %>">
                         </div>
                     <% } %>

@@ -11,11 +11,11 @@ exports.getLastRollUp = (req, res, next) => {
             res.status(200).send(lastCheckin);
         }
         else{
-            next({status: 400, messageCode: 'NoRollUpFound', errorMessage: 'You have not roll up in system'})
+            res.status(204).json({});
         }
     }).catch(err => {
         console.log(err)
-        res.status()
+        res.status(500).send("error")
     })
 }
 
