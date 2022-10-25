@@ -4,6 +4,7 @@ const express = require('express');
 
 const employeeController = require('../controllers/employees');
 const rollUpController = require('../controllers/rollUp');
+const employeeCovidController = require('../controllers/employeesCovid');
 
 const router = express.Router();
 
@@ -28,6 +29,8 @@ router.get('/employee/checkout/:employeeId', rollUpController.getDetailToCheckOu
 // POST CheckIn
 router.post('/employee/checkout/:employeeId', rollUpController.postDetailToCheckOut);
 
+//GET Employee-covid list
+router.get('/employees-covid', employeeCovidController.getEmployeesCovid);
 
 //Generate sample data
 router.get('/employees/generate', employeeController.generateSample);

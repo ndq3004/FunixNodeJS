@@ -1,10 +1,10 @@
 exports.roleData = [
     {
-        id: 1,
-        name: 'Employee'
+        roleId: 1,
+        roleName: 'Employee'
     },
     {
-        id: 2,
-        name: 'Manager'
+        roleId: 2,
+        roleName: 'Manager'
     }
 ]

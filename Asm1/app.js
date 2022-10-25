@@ -38,7 +38,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 app.use((err, req, res, next) => {
   console.log('this is error handler')
-  
+  console.log(err)
   if (res.headersSent) {
     return next(err)
   }

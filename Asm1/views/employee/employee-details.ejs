@@ -35,7 +35,7 @@
                         <label for="role">Role</label>
                         <select multiple class="height-60 custom-select form-control" id="role" name="role">
                             <% for(let i of [1,2]) {%>
-                                <% if(employee.role.roleId == i) { %>
+                                <% if(employee.role && employee.role.roleId == i) { %>
                                     <option value="<%= i%>" selected><%= i === 1 ? 'Employee' : 'Manager'%></option>    
                                 <% } else { %>
                                     <option value="<%= i%>"><%= i === 1 ? 'Employee' : 'Manager'%></option>    

@@ -6,21 +6,20 @@
 
     <body>
         <%- include('../includes/navigation.ejs') %>
-            <h1>Employees Management</h1>
+            <h1>Covid Management</h1>
             <main>
                 <div class="search-bar">
                     <div class="search-bar__input">
                         <input id="input-search-employee" placeholder="search">
                     </div>
                 </div>
-                <table id="employeeList" class="stripe row-border order-column" style="width:100%">
+                <table id="employeeCovidList" class="stripe row-border order-column" style="width:100%">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Age</th>
                             <th>Email</th>
-                            <th>Salary</th>
-                            <th>Role</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
                             <th width="10%">Action</th>
                         </tr>
                     </thead>
@@ -36,19 +35,11 @@
                                             <%= employee.age %>
                                         </td>
                                         <td>
-                                            <%= employee.email %>
-                                        </td>
-                                        <td>
-                                            <%= employee.salary %>
-                                        </td>
-                                        <td>
-                                            <%= employee.role ? employee.role.roleName : ''%>
+                                            <%= employee.role.roleName %>
                                         </td>
                                         <td eid="<%= employee._id %>">
                                             <button class="view-details-employee">View</button> |
-                                            <button class="edit-details-employee">Edit</button> |
-                                            <button class="checkin-employee">CheckIn</button> |
-                                            <button class="checkout-employee">CheckOut</button>
+                                            <button class="edit-details-employee">Add</button>
                                         </td>
                                     </tr>
                                 <% } %>

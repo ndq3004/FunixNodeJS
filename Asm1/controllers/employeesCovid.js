@@ -1,7 +1,8 @@
 const Employee = require('../models/employee');
+const EmployeeCovid = require('../models/employee');
 const roleData = require('../util/roleData').roleData;
 
-exports.getEmployees = (req, res, next) => {
+exports.getEmployeesCovid = (req, res, next) => {
   Employee.fetchAll()
     .then(employees => {
       res.render('admin/Employees', {
