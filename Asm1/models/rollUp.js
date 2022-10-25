@@ -59,6 +59,20 @@ class RollUp {
             });
     }
 
+    static fetchAllByEmployeeId(employeeId) {
+        const db = getDb();
+        return db
+            .collection('rollUp')
+            .find({ employeeId: employeeId })
+            .toArray()
+            .then(rollUps => {
+                return rollUps;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     static getWorkingStatusById(employeeId) {
         const db = getDb();
         return db

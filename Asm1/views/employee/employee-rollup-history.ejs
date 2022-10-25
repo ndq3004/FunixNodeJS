@@ -1,0 +1,32 @@
+<h1>Rollup list</h1>
+<main>
+    <table id="rollUpList" class="stripe row-border order-column" style="width:100%">
+        <thead>
+            <tr>
+                <th>Work place</th>
+                <th>Start time</th>
+                <th>End time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(rollUpHistory && rollUpHistory.length> 0) { %>
+                <% for(let record of rollUpHistory) { %>
+                    <% if( record) {%>
+                        <tr>
+                            <td>
+                                <%= record.workPlace %>
+                            </td>
+                            <td>
+                                <%= record.startTime %>
+                            </td>
+                            <td>
+                                <%= record.endTime %>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>
+
+</main>

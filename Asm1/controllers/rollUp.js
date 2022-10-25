@@ -3,12 +3,11 @@ const RollUp = require("../models/rollUp");
 
 exports.getDetailToCheckIn = (req, res, next) => {
   const employeeId = req.params ? req.params.employeeId : null;
-  console.log(employeeId);
   Employee.findById(employeeId).then((employee) => {
     // unworking employee is allowed to checkout in
     RollUp.getWorkingStatusById(employeeId)
       .then((lastCheckin) => {
-        const goToCheckinPage = function () {
+        const goToCheckinPage = function (history) {
           const currentDate = new Date();
           res.render("employee/employee-rollup", {
             employee: employee,
@@ -19,6 +18,7 @@ exports.getDetailToCheckIn = (req, res, next) => {
                 .toISOString()
                 .slice(0, 16),
             },
+            rollUpHistory: history,
             pageTitle: "Employee Checkin",
             path: req.originalUrl,
             state: "checkin",
@@ -26,7 +26,9 @@ exports.getDetailToCheckIn = (req, res, next) => {
         };
         if (lastCheckin) {
           if (lastCheckin.endTime) {
-            goToCheckinPage();
+            RollUp.fetchAllByEmployeeId(employeeId).then(history => {
+              goToCheckinPage(history);
+            })
           } else {
             next({
               status: 400,
@@ -71,25 +73,28 @@ exports.getDetailToCheckOut = (req, res, next) => {
       if (lastCheckin) {
         const currentDate = new Date();
         const startTime = lastCheckin.startTime;
-        res.render("employee/employee-rollup", {
-          employee: employee,
-          rollUpData: {
-            ...lastCheckin,
-            startTime: new Date(
-              startTime.getTime() - startTime.getTimezoneOffset() * 60000
-            )
-              .toISOString()
-              .slice(0, 16),
-            endTime: new Date(
-              currentDate.getTime() - currentDate.getTimezoneOffset() * 60000
-            )
-              .toISOString()
-              .slice(0, 16),
-          },
-          pageTitle: "Employee Checkout",
-          path: req.originalUrl,
-          state: "checkout",
-        });
+        RollUp.fetchAllByEmployeeId(employeeId).then(history => {
+          res.render("employee/employee-rollup", {
+            employee: employee,
+            rollUpData: {
+              ...lastCheckin,
+              startTime: new Date(
+                startTime.getTime() - startTime.getTimezoneOffset() * 60000
+              )
+                .toISOString()
+                .slice(0, 16),
+              endTime: new Date(
+                currentDate.getTime() - currentDate.getTimezoneOffset() * 60000
+              )
+                .toISOString()
+                .slice(0, 16),
+            },
+            rollUpHistory: history,
+            pageTitle: "Employee Checkout",
+            path: req.originalUrl,
+            state: "checkout",
+          });
+        })
       }
     });
   });
@@ -98,7 +103,7 @@ exports.getDetailToCheckOut = (req, res, next) => {
 exports.postDetailToCheckOut = (req, res, next) => {
   const employeeId = req.params ? req.params.employeeId : null;
   const body = req.body;
-    console.log('body', body.startTime)
+  console.log(body)
   const rollUp = new RollUp(
     employeeId,
     body.workPlace,

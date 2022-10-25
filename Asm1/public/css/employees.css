@@ -37,3 +37,9 @@ div.dataTables_wrapper {
 .height-60 {
     height: 60px !important;
 }
+
+/* Some custom attribute */
+.disable{
+    pointer-events:none;
+    background:grey;
+}
