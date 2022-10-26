@@ -2,46 +2,32 @@ const Employee = require('../models/employee');
 const EmployeeCovid = require('../models/employee');
 const roleData = require('../util/roleData').roleData;
 
-exports.getEmployeesCovid = (req, res, next) => {
-  Employee.fetchAll()
-    .then(employees => {
-      res.render('admin/Employees', {
-        employees: employees,
-        pageTitle: 'Admin Employees',
-        path: '/admin/Employees'
-      });
-    })
-    .catch(err => console.log(err));
-};
-
-exports.getEmployeeDetails = (req, res, next) => {
+exports.showAddEmployeeCovidDetail = (req, res, next) => {
   const employeeId = req.params.employeeId;
-  const state = req.url.includes('edit') ? 'edit' : 'view';
 
   Employee.findById(employeeId).then(employee=> {
     res.render('employee/employee-details',{
       employee: employee,
       pageTitle: 'Employee Details',
       path: req.originalUrl,
-      state: state
+      state: 'add'
     });
   }).catch(er => console.log(er))
-}
+};
 
-exports.addOrUpdateEmployeeDetails = (req, res, next) => {
+
+exports.addEmployeeCovidDetail = (req, res, next) => {
   req.body.role = roleData.find(r => r.roleId == req.body.role);
   console.log(req.body.role)
   const body = req.body;
-  const employee = new Employee(
-    body.name, 
-    body.age, 
-    body.salary, 
-    body.role, 
-    body.managerId, 
-    body.email, 
-    body.avatar, 
-    body._id)
-  employee.save().then(result => {
+  const employeeCovid = new EmployeeCovid(
+    body.employeeId, 
+    body.fromDate, 
+    body.toDate, 
+    body.numOfVaccins, 
+    body.numOfInfection, 
+    null)
+    employeeCovid.save().then(result => {
     res.redirect('/admin/employees')
   }).catch(err => console.log(err));
 }

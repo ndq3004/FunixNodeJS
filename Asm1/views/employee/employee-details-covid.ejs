@@ -1,0 +1,61 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/employees.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <main>
+                <h2><%= pageTitle%></h2>
+                <form id="formDetails" action="<%= path %>" method="POST">
+                    <input type="text" hidden id="employeeId" name="employeeId" value="<%= employee._id%>">
+                    <input type="text" hidden id="formMode" value="<%= state %>">
+                    <div class="card card-body form-group">
+                        <label for="name">Employee name</label>
+                        <input type="text" class="form-control" disabled
+                            placeholder="employee name" value="<%= employee.name%>">
+                    </div>
+
+                    <div class="card card-body form-group">
+                        <label for="numOfInjections">Number of injections</label>
+                        <input type="number" class="form-control" id="numOfInjections" value="0" 
+                            name ="numOfInjections" min="0" max="10" >
+                    </div>
+
+                    <div class="card card-body form-group">
+                        <label for="numOfInfections">Number of infections</label>
+                        <input type="number" class="form-control" id="numOfInfections" value="0" 
+                            name ="numOfInfections" min="0" max="10" >
+                    </div>
+
+                    <div class="card card-body form-group"> 
+                        <label for="fromDate">End time (date and time):</label>
+                        <input type="datetime-local" id="fromDate" name="fromDate">
+                    </div>
+
+                    <div class="card card-body form-group"> 
+                        <label for="todate">End time (date and time):</label>
+                        <input type="datetime-local" id="toDate" name="endTime">
+                    </div>
+                    
+                    <div class="form-group">
+                        <% if(state === 'edit') { %>
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <input type="button" onclick="function back(){location.href='/admin/employees'};back()" value="Back" class="btn btn-outline-dark">
+                        <% } else if(state === 'add') { %>
+                            <button type="submit" class="btn btn-success">Add</button>
+                            <input type="button" onclick="function back(){location.href='/admin/employees'};back()" value="Back" class="btn btn-outline-dark">
+                        <% } else if(state === 'view') { %>
+                            <input type="button" onclick="function back(){location.href='/admin/employees'};back()" value="Back" class="btn btn-outline-dark">
+                        <% } %>
+                    </div>
+                </form>
+
+            </main>
+
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+            <script src="/js/employee-details.js"></script>
+            <%- include('../includes/end.ejs') %>

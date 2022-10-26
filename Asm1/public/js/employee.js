@@ -133,4 +133,16 @@ $(document).ready(function () {
 
         }
     })
+
+    $('.add-covid-employee').on('click', function (e) {
+        let parent = e.currentTarget.parentElement;
+        let employeeId = parent.attributes['eid'] ? parent.attributes['eid'].value : "";
+
+        if (employeeId) {
+            // get last checkin checkout
+            location.href = "/admin/employee/covid-details/" + employeeId;
+        }
+    })
+
+    
 });

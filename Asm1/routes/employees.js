@@ -30,7 +30,8 @@ router.get('/employee/checkout/:employeeId', rollUpController.getDetailToCheckOu
 router.post('/employee/checkout/:employeeId', rollUpController.postDetailToCheckOut);
 
 //GET Employee-covid list
-router.get('/employees-covid', employeeCovidController.getEmployeesCovid);
+router.get('/employee/covid-details/:employeeId', employeeCovidController.showAddEmployeeCovidDetail);
+router.post('/employee/covid-details/:employeeId', employeeCovidController.addEmployeeCovidDetail);
 
 //Generate sample data
 router.get('/employees/generate', employeeController.generateSample);
