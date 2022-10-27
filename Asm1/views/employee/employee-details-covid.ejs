@@ -18,25 +18,40 @@
                     </div>
 
                     <div class="card card-body form-group">
-                        <label for="numOfInjections">Number of injections</label>
-                        <input type="number" class="form-control" id="numOfInjections" value="0" 
-                            name ="numOfInjections" min="0" max="10" >
+                        <label for="numOfInjections">Injections</label>
+                        <div id="injectionsContainer">
+                            <div id="injectionsContainerList">
+                                <% if(covidData.injections && covidData.injections.length > 0){ %>
+                                    <% for(let i = 0; i < covidData.injections.length; i++) {%>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Injection <%= i + 1%></span>
+                                            <input type="date" aria-label="Date" placeholder="Date" class="form-control" value="<%= covidData.injections[i].date%>">
+                                            <input type="text" aria-label="Note" placeholder="Note" class="form-control" value="<%= covidData.injections[i].note%>">
+                                        </div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            <button type="button" class="btn btn-light">Add</button>
+                        </div>
                     </div>
 
                     <div class="card card-body form-group">
-                        <label for="numOfInfections">Number of infections</label>
-                        <input type="number" class="form-control" id="numOfInfections" value="0" 
-                            name ="numOfInfections" min="0" max="10" >
-                    </div>
-
-                    <div class="card card-body form-group"> 
-                        <label for="fromDate">End time (date and time):</label>
-                        <input type="datetime-local" id="fromDate" name="fromDate">
-                    </div>
-
-                    <div class="card card-body form-group"> 
-                        <label for="todate">End time (date and time):</label>
-                        <input type="datetime-local" id="toDate" name="endTime">
+                        <label for="numOfInjections">Infections</label>
+                        <div id="infectionsContainer">
+                            <div id="infectionsContainerList">
+                                <% if(covidData.infections && covidData.infections.length > 0){ %>
+                                    <% for(let i = 0; i < covidData.infections.length; i++) {%>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Injection <%= i + 1%></span>
+                                            <input type="date" aria-label="From Date" placeholder="fromDate" class="form-control" value="<%= covidData.infections[i].fromDate%>">
+                                            <input type="date" aria-label="To Date" placeholder="toDate" class="form-control" value="<%= covidData.infections[i].toDate%>">
+                                            <input type="text" aria-label="Note" placeholder="Note" class="form-control" value="<%= covidData.infections[i].note%>">
+                                        </div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            <button type="button" class="btn btn-light">Add</button>
+                        </div>
                     </div>
                     
                     <div class="form-group">
@@ -57,5 +72,5 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
-            <script src="/js/employee-details.js"></script>
+            <script src="/js/employee-details-covid.js"></script>
             <%- include('../includes/end.ejs') %>

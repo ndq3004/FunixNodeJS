@@ -18,7 +18,7 @@ const shopRoutes = require('./routes/shop');
 const employeeRoutes = require('./routes/employees');
 const employeeApis = require('./routes/api/employees');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {

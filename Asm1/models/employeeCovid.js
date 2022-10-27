@@ -3,13 +3,12 @@ const getDb = require('../util/database').getDb;
 const COLLECTION_NAME = "employeeCovid"
 
 class EmployeeCovid {
-  constructor(employeeId, fromDate, toDate, numOfInjections, numOfInfections, id) {
-    this.employeeId = employeeId;
+  constructor(employeeId, fromDate, toDate, injections, infections) {
     this.fromDate = fromDate;
     this.toDate = toDate;
-    this.numOfInjections = numOfInjections;
-    this.numOfInfections = numOfInfections;
-    this._id = id ? new mongodb.ObjectId(id) : null;
+    this.injections = injections || [];
+    this.infections = infections || [];
+    this._id = employeeId ? new mongodb.ObjectId(employeeId) : null;
 
     // this.userId = userId;
   }
@@ -54,8 +53,8 @@ class EmployeeCovid {
       .collection(COLLECTION_NAME)
       .find({ _id: new mongodb.ObjectId(employeeId) })
       .next()
-      .then(product => {
-        return product;
+      .then(covidData => {
+        return covidData;
       })
       .catch(err => {
         console.log(err);
