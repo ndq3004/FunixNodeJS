@@ -8,6 +8,7 @@ exports.getDetailToCheckIn = (req, res, next) => {
     RollUp.getWorkingStatusById(employeeId)
       .then((lastCheckin) => {
         const goToCheckinPage = function (history) {
+          normalizeHistory(history);
           const currentDate = new Date();
           res.render("employee/employee-rollup", {
             employee: employee,
@@ -119,3 +120,15 @@ exports.postDetailToCheckOut = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+
+function normalizeHistory(histories) {
+  if(histories && histories.length > 0){
+    for(let history of histories){
+      console.log(history)
+        if(history.startTime)
+          history.startTime = history.startTime.toLocaleDateString() + ' ' + history.startTime.toLocaleTimeString();
+        if(history.endTime)
+          history.endTime = history.endTime.toLocaleDateString() + ' ' + history.endTime.toLocaleTimeString();
+    }
+  }
+}

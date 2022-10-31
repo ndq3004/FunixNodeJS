@@ -1,6 +1,5 @@
 const Employee = require('../models/employee');
 const EmployeeCovid = require('../models/employeeCovid');
-const roleData = require('../util/roleData').roleData;
 
 exports.showAddEmployeeCovidDetail = (req, res, next) => {
   const employeeId = req.params.employeeId;
@@ -16,7 +15,6 @@ exports.showAddEmployeeCovidDetail = (req, res, next) => {
 
   Employee.findById(employeeId).then((employee) =>  {
     EmployeeCovid.findById(employeeId).then(covidData => {
-      console.log('covidData',covidData)
       render(employee, covidData)
     })
   }).catch(er => console.log(er))
@@ -24,19 +22,42 @@ exports.showAddEmployeeCovidDetail = (req, res, next) => {
 
 
 exports.addEmployeeCovidDetail = (req, res, next) => {
-  req.body.role = roleData.find(r => r.roleId == req.body.role);
-  console.log(req.body)
   const body = req.body;
+  if(body.injections && Array.isArray(body.injections.date)){
+    const injections = JSON.parse(JSON.stringify(body.injections));
+    body.injections = []
+    for (let i = 0; i < injections.date.length; i++) {
+      body.injections.push({
+        date: injections.date[i],
+        note: injections.note[i]
+      });
+    }
+  }else{
+    body.injections = [body.injections]
+  }
 
-  // const employeeCovid = new EmployeeCovid(
-  //   body.employeeId, 
-  //   body.fromDate, 
-  //   body.toDate, 
-  //   body.numOfVaccins, 
-  //   body.numOfInfection,)
-  //   employeeCovid.save().then(result => {
-  //   res.redirect('/admin/employees')
-  // }).catch(err => console.log(err));
+  if(body.infections && Array.isArray(body.infections.fromDate)){
+    const infections = JSON.parse(JSON.stringify(body.infections));
+    body.infections = []
+    for (let i = 0; i < infections.fromDate.length; i++) {
+      body.infections.push({
+        fromDate: infections.fromDate[i],
+        toDate: infections.toDate[i],
+        note: infections.note[i]
+      });
+    }
+  }else{
+    body.infections = [body.infections]
+  }
+
+  const employeeCovid = new EmployeeCovid(
+    body.employeeId,
+    body.injections, 
+    body.infections
+  )
+  employeeCovid.save().then(result => {
+    res.redirect('/admin/employees')
+  }).catch(err => console.log(err));
 }
 
 

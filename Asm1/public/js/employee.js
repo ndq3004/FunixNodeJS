@@ -19,6 +19,7 @@ $(document).ready(function () {
 
         table = document.getElementById("employeeList");
         tr = table.getElementsByTagName("tr");
+        var reg = new RegExp(inputValue, 'g');
 
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td");
@@ -27,11 +28,11 @@ $(document).ready(function () {
                 if (td[j]) {
                     txtValue = td[j].textContent || td[j].innerText;
                 }
-                if (txtValue.toLowerCase().indexOf(inputValue) > -1) {
-                    display = display || true;
-                } else {
-                    display = display || false;
-                }
+
+                if (txtValue.trim().toLowerCase().match(reg)){//txtValue.toLowerCase().indexOf(inputValue) > -1) {
+                    display = true;
+                    break;
+                } 
             }
             tr[i].style.display = display ? "" : "none";
         }

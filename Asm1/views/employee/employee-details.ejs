@@ -27,6 +27,12 @@
                             placeholder="name@example.com" value="<%= employee.email%>">
                     </div>
                     <div class="card card-body form-group">
+                        <label for="avatar">Avatar url</label>
+                        <input type="file" class="form-control" id="avatar"
+                            placeholder="http://example.com/aaa.jpg" accept="image/*">
+                        <input type="text" hidden name="avatar" value="<%= employee.avatar%>">
+                    </div>
+                    <div class="card card-body form-group">
                         <label for="salary">Salary</label>
                         <input type="number" class="form-control" id="salary" value="<%= employee.salary%>" 
                             name ="salary" min="10" max="50000000" >

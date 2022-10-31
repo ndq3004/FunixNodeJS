@@ -23,11 +23,13 @@
                             <div id="injectionsContainerList">
                                 <% if(covidData.injections && covidData.injections.length > 0){ %>
                                     <% for(let i = 0; i < covidData.injections.length; i++) {%>
-                                        <div class="input-group">
-                                            <span class="input-group-text">Injection <%= i + 1%></span>
-                                            <input type="date" aria-label="Date" placeholder="Date" class="form-control" value="<%= covidData.injections[i].date%>">
-                                            <input type="text" aria-label="Note" placeholder="Note" class="form-control" value="<%= covidData.injections[i].note%>">
-                                        </div>
+                                        <% if(covidData.injections[i]) {%>
+                                            <div class="input-group">
+                                                <span class="input-group-text">Injection <%= i + 1%></span>
+                                                <input type="date" aria-label="Date" placeholder="Date" class="form-control" name="injections[date]" value="<%= covidData.injections[i].date%>">
+                                                <input type="text" aria-label="Note" placeholder="Note" class="form-control" name="injections[note]" value="<%= covidData.injections[i].note%>">
+                                            </div>
+                                        <% } %>
                                     <% } %>
                                 <% } %>
                             </div>
@@ -41,12 +43,14 @@
                             <div id="infectionsContainerList">
                                 <% if(covidData.infections && covidData.infections.length > 0){ %>
                                     <% for(let i = 0; i < covidData.infections.length; i++) {%>
-                                        <div class="input-group">
-                                            <span class="input-group-text">Injection <%= i + 1%></span>
-                                            <input type="date" aria-label="From Date" placeholder="fromDate" class="form-control" value="<%= covidData.infections[i].fromDate%>">
-                                            <input type="date" aria-label="To Date" placeholder="toDate" class="form-control" value="<%= covidData.infections[i].toDate%>">
-                                            <input type="text" aria-label="Note" placeholder="Note" class="form-control" value="<%= covidData.infections[i].note%>">
-                                        </div>
+                                        <% if(covidData.infections[i]) { %>
+                                            <div class="input-group">
+                                                <span class="input-group-text">Injection <%= i + 1%></span>
+                                                <input type="date" aria-label="From Date" placeholder="fromDate" class="form-control" name="infections[fromDate]" value="<%= covidData.infections[i].fromDate%>">
+                                                <input type="date" aria-label="To Date" placeholder="toDate" class="form-control" name="infections[toDate]" value="<%= covidData.infections[i].toDate%>">
+                                                <input type="text" aria-label="Note" placeholder="Note" class="form-control" name="infections[note]" value="<%= covidData.infections[i].note%>">
+                                            </div>
+                                        <% } %>
                                     <% } %>
                                 <% } %>
                             </div>

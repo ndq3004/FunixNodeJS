@@ -12,9 +12,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-
 const employeeRoutes = require('./routes/employees');
 const employeeApis = require('./routes/api/employees');
 
@@ -30,15 +27,18 @@ app.use((req, res, next) => {
     .catch(err => console.log(err));
 });
 
-app.use('/admin', adminRoutes);
+
 app.use('/admin', employeeRoutes);
 app.use('/api/admin', employeeApis);
-app.use(shopRoutes);
+
+//set default
+app.get('/', (req, res, next) => {
+  res.redirect('/admin/employees')
+})
 
 app.use(errorController.get404);
 app.use((err, req, res, next) => {
   console.log('this is error handler')
-  console.log(err)
   if (res.headersSent) {
     return next(err)
   }

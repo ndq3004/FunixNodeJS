@@ -3,33 +3,52 @@ const getDb = require('../util/database').getDb;
 const COLLECTION_NAME = "employeeCovid"
 
 class EmployeeCovid {
-  constructor(employeeId, fromDate, toDate, injections, infections) {
-    this.fromDate = fromDate;
-    this.toDate = toDate;
+  constructor(employeeId, injections, infections) {
     this.injections = injections || [];
     this.infections = infections || [];
     this._id = employeeId ? new mongodb.ObjectId(employeeId) : null;
 
     // this.userId = userId;
+    // this.getData = this.getData
   }
 
-  save() {
+  getData() {
+    return {
+      injections: this.injections,
+      infections: this.infections,
+      _id: this._id
+    }
+  }
+
+  async save() {
     const db = getDb();
     let dbOp;
-    if (this._id) {
-      // Update the product
-      dbOp = db
-        .collection(COLLECTION_NAME)
-        .updateOne({ _id: this._id }, { $set: this });
-    } else {
-      dbOp = db.collection(COLLECTION_NAME).insertOne(this);
+    console.log(this._id.toString())
+    let eCovid;
+    try {
+      eCovid = await EmployeeCovid.findById(this._id.toString());
+      console.log(eCovid)
+      if (eCovid) {
+        // Update the product
+        dbOp = db
+          .collection(COLLECTION_NAME)
+          .updateOne({ _id: this._id }, { $set: this });
+      } else {
+        dbOp = db.collection(COLLECTION_NAME).insertOne(this);
+      }
+  
+      return dbOp
+        .then(result => {
+          console.log(result)
+          return result;
+        })
+        .catch(err => {
+          console.log('err', err);
+        });
+    } catch (error) {
+      console.log('eeeeeeeeeeeeeee', error)
     }
-    return dbOp
-      .then(result => {
-      })
-      .catch(err => {
-        console.log(err);
-      });
+
   }
 
   static fetchAll() {
@@ -48,6 +67,7 @@ class EmployeeCovid {
   }
 
   static findById(employeeId) {
+    console.log(employeeId)
     const db = getDb();
     return db
       .collection(COLLECTION_NAME)
