@@ -9,7 +9,8 @@ exports.showAddEmployeeCovidDetail = (req, res, next) => {
       pageTitle: 'Employee Details',
       path: req.originalUrl,
       state: 'add',
-      covidData: covidData || {}
+      covidData: covidData || {},
+      isAuthenticated: req.session.isLoggedIn
     });
   }
 

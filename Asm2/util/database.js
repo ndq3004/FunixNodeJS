@@ -1,8 +1,9 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const config = require('../config');
 
 let _db;
 
-let dbUri = 'mongodb+srv://nguyenquan3004:30041998@clusterfunix.utiuxfg.mongodb.net/?retryWrites=true&w=majority';
+let dbUri = config.mongoDBUri;
 
 const mongoConnect = callback => {
   const client = new MongoClient(dbUri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });

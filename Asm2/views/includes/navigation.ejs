@@ -7,15 +7,19 @@
                 <a class="<%= path === '/admin/employees' ? 'active' : '' %>" href="/admin/employees">Employees
                 </a>
             </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/admin/employees-covid' ? 'active' : '' %>" href="/admin/employees-covid">Employees Covid
-                </a>
-            </li>
         </ul>
         <ul class="main-header__item-list">
-            <li class="main-header__item">
-                <a href="/login">Login</a>
-            </li>
+            <% if(!isAuthenticated) {%>
+                <li class="main-header__item">
+                    <a href="/login">Login</a>
+                </li>
+            <% } %>
+
+            <% if(isAuthenticated) {%>
+                <li class="main-header__item">
+                    <a href="/logout">Logout</a>
+                </li>
+            <% } %>
         </ul>
     </nav>
 </header>
@@ -28,8 +32,16 @@
             </li>
         </ul>
         <ul class="main-header__item-list">
-            <li class="main-header__item">
-                <a href="/login">Login</a>
-            </li>
+            <% if(!isAuthenticated) {%>
+                <li class="main-header__item">
+                    <a href="/login">Login</a>
+                </li>
+            <% } %>
+
+            <% if(isAuthenticated) {%>
+                <li class="main-header__item">
+                    <a href="/logout">Logout</a>
+                </li>
+            <% } %>
         </ul>
 </nav>

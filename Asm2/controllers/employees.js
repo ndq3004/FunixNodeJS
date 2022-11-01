@@ -7,7 +7,8 @@ exports.getEmployees = (req, res, next) => {
       res.render('admin/Employees', {
         employees: employees,
         pageTitle: 'Admin Employees',
-        path: '/admin/Employees'
+        path: '/admin/Employees',
+        isAuthenticated: req.session.isLoggedIn
       });
     })
     .catch(err => console.log(err));
@@ -22,7 +23,8 @@ exports.getEmployeeDetails = (req, res, next) => {
       employee: employee,
       pageTitle: 'Employee Details',
       path: req.originalUrl,
-      state: state
+      state: state,
+      isAuthenticated: req.session.isLoggedIn
     });
   }).catch(er => console.log(er))
 }
