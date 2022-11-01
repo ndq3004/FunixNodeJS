@@ -1,0 +1,45 @@
+/* table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+} */
+
+.search-bar{
+    position: relative;
+    height: 40px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.search-bar__input{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* Ensure that the demo table scrolls */
+th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.height-60 {
+    height: 60px !important;
+}
+
+/* Some custom attribute */
+.disable{
+    pointer-events:none;
+    background:grey;
+}

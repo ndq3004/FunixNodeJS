@@ -1,0 +1,75 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/employees.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.1.0/css/fixedColumns.dataTables.min.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <h1>Employees Management</h1>
+            <main>
+                <div class="search-bar">
+                    <div class="search-bar__input">
+                        <input id="input-search-employee" placeholder="search">
+                    </div>
+                </div>
+                <table id="employeeList" class="stripe row-border order-column" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Salary</th>
+                            <th>Role</th>
+                            <th width="10%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(employees && employees.length> 0) { %>
+                            <% for(let employee of employees) { %>
+                                <% if( employee.name) {%>
+                                    <tr>
+                                        <td>
+                                            <%= employee.name %>
+                                        </td>
+                                        <td>
+                                            <%= employee.age %>
+                                        </td>
+                                        <td>
+                                            <%= employee.email %>
+                                        </td>
+                                        <td>
+                                            <%= employee.salary %>
+                                        </td>
+                                        <td>
+                                            <%= employee.role ? employee.role.roleName : ''%>
+                                        </td>
+                                        <td eid="<%= employee._id %>">
+                                            <button class="view-details-employee">View</button> |
+                                            <button class="edit-details-employee">Edit</button> |
+                                            <button class="checkin-employee">CheckIn</button> |
+                                            <button class="checkout-employee">CheckOut</button> |
+                                            <button class="add-covid-employee">Covid</button>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </tbody>
+                </table>
+
+            </main>
+
+            <div id="dialog-message">
+                <p id="dialog-message-text">
+                </p>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+            <script src="/js/employee.js"></script>
+            <%- include('../includes/end.ejs') %>
