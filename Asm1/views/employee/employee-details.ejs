@@ -14,23 +14,25 @@
                     <div class="card card-body form-group">
                         <label for="name">Employee name</label>
                         <input type="text" class="form-control" id="name" name="name"
-                            placeholder="employee name" value="<%= employee.name%>">
+                            placeholder="employee name" value="<%= employee.name%>" disabled>
                     </div>
                     <div class="card card-body form-group">
                         <label for="age">Age</label>
                         <input type="number" class="form-control" id="age" name="age"
-                            value="<%= employee.age%>" min="10" max="50000000" >
+                            value="<%= employee.age%>" min="10" max="50000000" disabled>
                     </div>
                     <div class="card card-body form-group">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" name="email"
-                            placeholder="name@example.com" value="<%= employee.email%>">
+                            placeholder="name@example.com" value="<%= employee.email%>" disabled>
                     </div>
                     <div class="card card-body form-group">
                         <label for="avatar">Avatar url</label>
-                        <input type="file" class="form-control" id="avatar"
-                            placeholder="http://example.com/aaa.jpg" accept="image/*">
-                        <input type="text" hidden name="avatar" value="<%= employee.avatar%>">
+                        <input type="file" class="form-control" id="avatarInput"
+                            placeholder="" accept="image/*">
+                        <input type="text" hidden name="avatar" value="<%= employee.avatar%>" id="avatar">
+                        <img src="" alt="" width="150" height="150" id="avatarBase64" >
+                            
                     </div>
                     <div class="card card-body form-group">
                         <label for="salary">Salary</label>

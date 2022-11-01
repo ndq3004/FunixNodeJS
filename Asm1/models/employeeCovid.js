@@ -39,7 +39,6 @@ class EmployeeCovid {
   
       return dbOp
         .then(result => {
-          console.log(result)
           return result;
         })
         .catch(err => {

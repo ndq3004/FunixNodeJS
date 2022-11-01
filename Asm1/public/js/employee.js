@@ -94,7 +94,6 @@ $(document).ready(function () {
                     location.href = "/admin/employee/checkin/" + employeeId
                 }
             }).catch(ex => {
-                debugger
             })
 
         }

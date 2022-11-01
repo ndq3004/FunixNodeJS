@@ -28,8 +28,10 @@ exports.getEmployeeDetails = (req, res, next) => {
 }
 
 exports.addOrUpdateEmployeeDetails = (req, res, next) => {
-  req.body.role = roleData.find(r => r.roleId == req.body.role);
-  console.log(req.body.role)
+  if(req.body.role){
+    req.body.role = roleData.find(r => r.roleId == req.body.role);
+  }
+  console.log(req.body)
   const body = req.body;
   const employee = new Employee(
     body.name, 
